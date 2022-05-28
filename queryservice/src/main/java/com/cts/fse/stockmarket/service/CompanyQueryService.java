@@ -8,7 +8,6 @@ import com.cts.fse.stockmarket.repository.CompanyQueryRepository;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CompanyQueryService {

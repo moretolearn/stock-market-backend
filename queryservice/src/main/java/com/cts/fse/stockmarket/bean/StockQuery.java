@@ -2,7 +2,6 @@ package com.cts.fse.stockmarket.bean;
 
 import lombok.Data;
 
-import java.util.Calendar;
 import java.util.Date;
 
 @Data

@@ -9,7 +9,6 @@ import com.cts.fse.stockmarket.bean.CompanyCreation;
 import com.cts.fse.stockmarket.service.CompanyQueryService;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/company")

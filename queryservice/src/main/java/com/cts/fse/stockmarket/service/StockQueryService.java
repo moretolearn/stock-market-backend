@@ -3,14 +3,11 @@ package com.cts.fse.stockmarket.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.cts.fse.stockmarket.bean.CompanyCreation;
 import com.cts.fse.stockmarket.bean.StockCreation;
-import com.cts.fse.stockmarket.bean.StockQuery;
 import com.cts.fse.stockmarket.repository.StockQueryRepository;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class StockQueryService {

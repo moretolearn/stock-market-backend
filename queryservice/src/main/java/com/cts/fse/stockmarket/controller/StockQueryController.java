@@ -5,13 +5,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.cts.fse.stockmarket.bean.CompanyCreation;
 import com.cts.fse.stockmarket.bean.StockCreation;
-import com.cts.fse.stockmarket.service.CompanyQueryService;
 import com.cts.fse.stockmarket.service.StockQueryService;
 
 import java.util.List;
-import java.util.Optional;
 @RestController
 @RequestMapping("/api/v1/stock")
 public class StockQueryController {
