@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 @SpringBootApplication
-@EntityScan("com.cts.fse.stockmarket.query.bean")
+@EntityScan("com.cts.fse.stockmarket.commonutils.query.bean")
 public class QueryServiceApplication
 {
     public static void main(String[] args)

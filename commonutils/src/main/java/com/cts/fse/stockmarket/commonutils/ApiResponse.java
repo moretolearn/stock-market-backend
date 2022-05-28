@@ -1,4 +1,4 @@
-package com.cts.fse.stockmarket;
+package com.cts.fse.stockmarket.commonutils;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
