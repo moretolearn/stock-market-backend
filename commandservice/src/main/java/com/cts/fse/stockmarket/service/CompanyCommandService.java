@@ -8,9 +8,7 @@ import com.cts.fse.stockmarket.bean.StockCreation;
 import com.cts.fse.stockmarket.repository.CompanyCommandRepository;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class CompanyCommandService {
