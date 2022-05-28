@@ -1,4 +1,4 @@
-package query.service.configuration;
+package com.cts.fse.stockmarket.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

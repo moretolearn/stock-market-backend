@@ -1,4 +1,4 @@
-package query.service.controller;
+package com.cts.fse.stockmarket.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -7,9 +7,8 @@ import org.springframework.web.bind.annotation.*;
 
 import com.cts.fse.stockmarket.bean.CompanyCreation;
 import com.cts.fse.stockmarket.bean.StockCreation;
-
-import query.service.service.CompanyQueryService;
-import query.service.service.StockQueryService;
+import com.cts.fse.stockmarket.service.CompanyQueryService;
+import com.cts.fse.stockmarket.service.StockQueryService;
 
 import java.util.List;
 import java.util.Optional;

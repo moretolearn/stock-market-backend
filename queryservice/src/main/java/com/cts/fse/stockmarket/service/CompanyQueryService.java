@@ -1,11 +1,10 @@
-package query.service.service;
+package com.cts.fse.stockmarket.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cts.fse.stockmarket.bean.CompanyCreation;
-
-import query.service.repository.CompanyQueryRepository;
+import com.cts.fse.stockmarket.repository.CompanyQueryRepository;
 
 import java.util.ArrayList;
 import java.util.List;

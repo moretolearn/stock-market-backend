@@ -1,4 +1,4 @@
-package query.service.repository;
+package com.cts.fse.stockmarket.repository;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
