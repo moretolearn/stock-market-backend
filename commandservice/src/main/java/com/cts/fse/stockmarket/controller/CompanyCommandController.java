@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.cts.fse.stockmarket.ApiResponse;
 import com.cts.fse.stockmarket.bean.CompanyCreation;
 import com.cts.fse.stockmarket.bean.StockCreation;
 import com.cts.fse.stockmarket.service.CompanyCommandService;
@@ -21,10 +22,13 @@ public class CompanyCommandController<T> {
     CompanyCommandService companyService;
 
     @PostMapping("/add")
-    public ResponseEntity<String> addCompany(@RequestBody CompanyCreation company) {
+    public ResponseEntity<ApiResponse<T>> addCompany(@RequestBody CompanyCreation company) {
 
-        companyService.addCompany(company);
-        return new ResponseEntity<>("Company Added Successfully", HttpStatus.CREATED);
+        CompanyCreation addCompany = companyService.addCompany(company);
+        if(addCompany.getCompanyCode()!=0) {
+        	return new ResponseEntity<>(new ApiResponse<>(HttpStatus.CREATED.value(), true, "Company Added Successfully", addCompany), HttpStatus.CREATED);
+        }
+        return new ResponseEntity<>(new ApiResponse<>(HttpStatus.NO_CONTENT.value(), true, "Company Added Successfully", addCompany), HttpStatus.NO_CONTENT);
     }
 
     @DeleteMapping("/delete/{id}")

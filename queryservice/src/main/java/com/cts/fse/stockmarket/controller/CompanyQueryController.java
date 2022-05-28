@@ -13,6 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/company")
 public class CompanyQueryController {
+	
     @Autowired
     private CompanyQueryService companyQueryService;
 

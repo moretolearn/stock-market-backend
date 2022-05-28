@@ -17,9 +17,10 @@ public class CompanyCommandService {
     @Autowired
     CompanyCommandRepository companyRepository;
 
-    public void addCompany(CompanyCreation company) {
+    public CompanyCreation addCompany(CompanyCreation company) {
         if (!companyRepository.existsById(Integer.valueOf(company.getCompanyCode())))
         companyRepository.save(company);
+        return company;
     }
 
     public void updateCompany(CompanyCreation company) {
