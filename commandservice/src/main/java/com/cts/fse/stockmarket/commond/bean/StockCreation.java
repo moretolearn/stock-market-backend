@@ -1,4 +1,4 @@
-package com.cts.fse.stockmarket.bean;
+package com.cts.fse.stockmarket.commond.bean;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;

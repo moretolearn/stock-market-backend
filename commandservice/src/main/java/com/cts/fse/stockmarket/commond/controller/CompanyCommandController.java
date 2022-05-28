@@ -1,4 +1,4 @@
-package com.cts.fse.stockmarket.controller;
+package com.cts.fse.stockmarket.commond.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,9 +7,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.cts.fse.stockmarket.ApiResponse;
-import com.cts.fse.stockmarket.bean.CompanyCreation;
-import com.cts.fse.stockmarket.bean.StockCreation;
-import com.cts.fse.stockmarket.service.CompanyCommandService;
+import com.cts.fse.stockmarket.commond.bean.CompanyCreation;
+import com.cts.fse.stockmarket.commond.bean.StockCreation;
+import com.cts.fse.stockmarket.commond.service.CompanyCommandService;
 
 import java.util.Date;
 import java.util.List;

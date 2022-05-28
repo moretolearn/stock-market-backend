@@ -1,4 +1,4 @@
-package com.cts.fse.stockmarket;
+package com.cts.fse.stockmarket.commond;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -5,7 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.cts.fse.stockmarket.bean.CompanyCreation;
+import com.cts.fse.stockmarket.commond.bean.CompanyCreation;
 import com.cts.fse.stockmarket.service.CompanyQueryService;
 
 import java.util.List;
