@@ -1,9 +1,10 @@
-package command.service.service;
+package com.cts.fse.stockmarket.service;
 
-import command.service.bean.StockCreation;
-import command.service.repository.StockCommandRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.cts.fse.stockmarket.bean.StockCreation;
+import com.cts.fse.stockmarket.repository.StockCommandRepository;
 
 @Service
 public class StockCommandService {

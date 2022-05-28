@@ -1,8 +1,9 @@
-package command.service.repository;
+package com.cts.fse.stockmarket.repository;
 
-import command.service.bean.CompanyCreation;
-import command.service.bean.StockCreation;
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.cts.fse.stockmarket.bean.CompanyCreation;
+import com.cts.fse.stockmarket.bean.StockCreation;
 
 import java.util.Date;
 import java.util.List;

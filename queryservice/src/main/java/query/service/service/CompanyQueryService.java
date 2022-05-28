@@ -1,8 +1,10 @@
 package query.service.service;
 
-import command.service.bean.CompanyCreation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.cts.fse.stockmarket.bean.CompanyCreation;
+
 import query.service.repository.CompanyQueryRepository;
 
 import java.util.ArrayList;

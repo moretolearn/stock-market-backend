@@ -1,13 +1,14 @@
-package command.service.controller;
+package com.cts.fse.stockmarket.controller;
 
-import command.service.bean.CompanyCreation;
-import command.service.bean.StockCreation;
-import command.service.repository.CompanyCommandRepository;
-import command.service.service.StockCommandService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import com.cts.fse.stockmarket.bean.CompanyCreation;
+import com.cts.fse.stockmarket.bean.StockCreation;
+import com.cts.fse.stockmarket.repository.CompanyCommandRepository;
+import com.cts.fse.stockmarket.service.StockCommandService;
 
 import java.util.Optional;
 

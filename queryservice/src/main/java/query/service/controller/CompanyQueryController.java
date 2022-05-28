@@ -1,10 +1,12 @@
 package query.service.controller;
 
-import command.service.bean.CompanyCreation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import com.cts.fse.stockmarket.bean.CompanyCreation;
+
 import query.service.service.CompanyQueryService;
 
 import java.util.List;

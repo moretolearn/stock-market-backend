@@ -1,10 +1,11 @@
-package command.service.service;
+package com.cts.fse.stockmarket.service;
 
-import command.service.bean.CompanyCreation;
-import command.service.bean.StockCreation;
-import command.service.repository.CompanyCommandRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.cts.fse.stockmarket.bean.CompanyCreation;
+import com.cts.fse.stockmarket.bean.StockCreation;
+import com.cts.fse.stockmarket.repository.CompanyCommandRepository;
 
 import java.util.Date;
 import java.util.HashMap;
