@@ -1,4 +1,4 @@
-package com.cts.fse.stockmarket.controller;
+package com.cts.fse.stockmarket.query.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.cts.fse.stockmarket.commond.bean.StockCreation;
-import com.cts.fse.stockmarket.service.StockQueryService;
+import com.cts.fse.stockmarket.query.service.StockQueryService;
 
 import java.util.List;
 @RestController

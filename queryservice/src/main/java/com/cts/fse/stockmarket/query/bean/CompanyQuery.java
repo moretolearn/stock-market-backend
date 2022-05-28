@@ -1,4 +1,4 @@
-package com.cts.fse.stockmarket.bean;
+package com.cts.fse.stockmarket.query.bean;
 
 import lombok.Data;
 
