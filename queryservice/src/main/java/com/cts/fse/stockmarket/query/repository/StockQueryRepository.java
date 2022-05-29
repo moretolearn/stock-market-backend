@@ -1,9 +1,16 @@
 package com.cts.fse.stockmarket.query.repository;
 
-import org.springframework.data.repository.CrudRepository;
+import java.util.Date;
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.cts.fse.stockmarket.commond.bean.StockCreation;
+import com.cts.fse.stockmarket.query.bean.StockQuery;
+
 @Repository
-public interface StockQueryRepository extends CrudRepository<StockCreation, Integer>{
+public interface StockQueryRepository extends JpaRepository<StockQuery, Integer>{
+	
+    List<StockQuery> findByCompanyQueryCompanyCodeAndCreatedOnBetween(int companyId, Date startDate, Date endDate);
+
 }
