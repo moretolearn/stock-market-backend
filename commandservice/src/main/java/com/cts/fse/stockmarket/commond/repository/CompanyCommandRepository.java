@@ -10,6 +10,5 @@ import java.util.List;
 
 public interface CompanyCommandRepository extends JpaRepository<CompanyCreation, Integer> {
 
-    List<StockCreation> findByCompanyCodeAndStocksCreatedOnBetween(int companyId, Date startDate, Date endDate);
 
 }
