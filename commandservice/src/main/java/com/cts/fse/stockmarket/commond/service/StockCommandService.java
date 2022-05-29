@@ -12,7 +12,8 @@ public class StockCommandService {
     @Autowired
     StockCommandRepository stockCommandRepository;
 
-    public void addStock(StockCreation stock) {
+    public StockCreation addStock(StockCreation stock) {
         stockCommandRepository.save(stock);
+        return stock;
     }
 }

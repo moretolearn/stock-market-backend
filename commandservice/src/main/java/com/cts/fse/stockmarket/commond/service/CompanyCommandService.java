@@ -39,9 +39,5 @@ public class CompanyCommandService {
         return "company deleted Successfully with id "+companyId;
     }
 
-    public List<StockCreation> findAllStocksBetweenDates(int companyCode, Date startDate, Date endDate){
-        List<StockCreation> stocksCreatedOnBetween = companyRepository
-                .findByCompanyCodeAndStocksCreatedOnBetween(companyCode, startDate, endDate);
-        return stocksCreatedOnBetween;
-    }
+   
 }
