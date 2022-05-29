@@ -11,7 +11,7 @@ import java.util.Date;
 public class StockCreation {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.SEQUENCE)
+    @GeneratedValue(strategy= GenerationType.AUTO)
     private int stockCode;
 
     private String stockName;
@@ -20,11 +20,13 @@ public class StockCreation {
 
     private double price;
 
+//    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss",timezone = "Asia/Kolkata")
+    @Temporal(TemporalType.DATE)
     private Date createdOn;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="companyCode", nullable=false)
+    @JoinColumn(name="companyCode", nullable=true)
     private CompanyCreation companyCreation;
 }
 
