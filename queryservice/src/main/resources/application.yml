@@ -12,6 +12,11 @@ spring:
     username: stock
     password: stock123
     driver-class-name: com.mysql.cj.jdbc.Driver
+  jackson:
+    date-format: dd-MM-yyyy hh:mm:ss  
+    time-zone: Asia/Kolkata
 server:
-  port : 8081
+  port : 8083
+
+  
 
