@@ -25,7 +25,7 @@ public class SwaggerConfiguration {
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder().title("Command Service API")
                 .description("Command Micro Service")
-                .termsOfServiceUrl("https://github.com/souvikdas1995/stock-market")
+                .termsOfServiceUrl("https://github.com/moretolearn/stock-market")
                 .version("1.0").build();
     }
 

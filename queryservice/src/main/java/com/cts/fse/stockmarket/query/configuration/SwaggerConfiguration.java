@@ -25,7 +25,7 @@ public class SwaggerConfiguration {
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder().title("Query Service API")
                 .description("Query Micro Service")
-                .termsOfServiceUrl("https://github.com/souvikdas1995/stock-market")
+                .termsOfServiceUrl("https://github.com/moretolearn/stock-market")
                 .version("1.0").build();
     }
 
