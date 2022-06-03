@@ -17,24 +17,28 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Data
 @Entity
-@Table(name = "stockquery")
+@Table(name = "stock")
 public class StockQuery {
 
 	@Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    private int stockCode;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int stockCode;
 
-    private String stockName;
+	private String stockName;
 
-    private String description;
+	private String description;
 
-    private double price;
+	private double price;
+
+	private Date startDate;
+
+	private Date endDate;
 
 //    @Temporal(TemporalType.DATE)
-    private Date createdOn;
+	private Date createdOn;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name="companyquery_company_code")
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private CompanyQuery companyQuery;
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "company_code")
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+	private CompanyQuery companyQuery;
 }

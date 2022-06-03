@@ -38,8 +38,8 @@ public class StockQueryController {
 	}
 	
     @GetMapping("/get/{companyCode}/{startDate}/{endDate}")
-    public ResponseEntity<List<StockQuery>> findAllStocksBetweenDates(@PathVariable(value = "companyCode") int companyCode, @PathVariable(value = "startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate,
-                                                                      @PathVariable(value = "endDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate){
+    public ResponseEntity<List<StockQuery>> findAllStocksBetweenDates(@PathVariable(value = "companyCode") int companyCode, @PathVariable(value = "startDate") @DateTimeFormat(pattern = "dd-MM-yyyy") Date startDate,
+                                                                      @PathVariable(value = "endDate") @DateTimeFormat(pattern = "dd-MM-yyyy") Date endDate){
         return new ResponseEntity<>(stockQueryService.findAllStocksBetweenDates(companyCode, startDate, endDate),HttpStatus.OK);
     }
 
