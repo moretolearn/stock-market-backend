@@ -9,6 +9,7 @@ import java.util.List;
 
 @Entity
 @Data
+@Table(name = "company")
 public class CompanyCreation {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)

@@ -6,12 +6,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.cts.fse.stockmarket.commond.bean.CompanyCreation;
-import com.cts.fse.stockmarket.commond.bean.StockCreation;
 import com.cts.fse.stockmarket.commond.service.CompanyCommandService;
 import com.cts.fse.stockmarket.commonutils.ApiResponse;
-
-import java.util.Date;
-import java.util.List;
 
 import javax.validation.Valid;
 
@@ -37,8 +33,9 @@ public class CompanyCommandController<T> {
 
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<?> deleteCompany(@PathVariable(value = "id") int companyId) throws Exception {
-		return new ResponseEntity<>(new ApiResponse<>(HttpStatus.NO_CONTENT.value(), true,
-				"Company Deleted Successffully ", companyService.deleteCompany(companyId)), HttpStatus.NO_CONTENT);
+		return new ResponseEntity<>(new ApiResponse<>(HttpStatus.OK.value(), true,
+				"Company Deleted Successffully ", companyService.deleteCompany(companyId)), HttpStatus.OK
+				);
 	}
 
 }
