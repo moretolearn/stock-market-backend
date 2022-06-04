@@ -73,4 +73,13 @@ public class StockQueryService {
         stockQueryRepository.deleteById(stockCode);
         return true;
     }
+    
+    public List<StockQuery> findAllStocksByCompanyCode(int companyCode){
+        Optional<CompanyQuery> companyQueryOptional = companyQueryRepository.findById(companyCode);
+        if(!companyQueryOptional.isPresent())
+            return  null;
+        List<StockQuery> stocksCreatedOnBetween = stockQueryRepository
+                .findByCompanyQueryCompanyCode(companyCode);
+        return stocksCreatedOnBetween;
+    }
 }

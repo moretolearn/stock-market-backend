@@ -12,5 +12,7 @@ import com.cts.fse.stockmarket.query.bean.StockQuery;
 public interface StockQueryRepository extends JpaRepository<StockQuery, Integer>{
 	
     List<StockQuery> findByCompanyQueryCompanyCodeAndCreatedOnBetween(int companyId, Date startDate, Date endDate);
+    
+    List<StockQuery> findByCompanyQueryCompanyCode(int companyId);
 
 }

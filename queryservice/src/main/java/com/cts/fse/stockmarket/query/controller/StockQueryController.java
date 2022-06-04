@@ -69,6 +69,10 @@ public class StockQueryController {
         return new ResponseEntity<>("stock deleted successfully",HttpStatus.OK);
     }
 
-
+    @GetMapping("/getall/{companyCode}")
+    public ResponseEntity<?> findAllStocksBYCompanyCode(@PathVariable(value = "companyCode") int companyCode){
+        return new ResponseEntity<>(new ApiResponse<>(HttpStatus.OK.value(), true, "Stock List Retrived Successfully",
+				stockQueryService.findAllStocksByCompanyCode(companyCode)), HttpStatus.OK);
+    }
 
 }
