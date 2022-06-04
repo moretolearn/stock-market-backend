@@ -34,4 +34,27 @@ public class StockCommandController {
 				new ApiResponse<>(HttpStatus.CREATED.value(), true, "Stock Added Successfully", addStock),
 				HttpStatus.CREATED);
 	}
+
+	@DeleteMapping("/{stockCode}")
+	public ResponseEntity<?> deleteStock(@PathVariable int stockCode) {
+		boolean isDeleted = stockService.deleteStock(stockCode);
+		if (!isDeleted)
+			return new ResponseEntity<>(new ApiResponse<>(HttpStatus.CREATED.value(), true,
+					"Stock Not Found With Id " + stockCode, stockCode), HttpStatus.CREATED);
+		return new ResponseEntity<>(
+				new ApiResponse<>(HttpStatus.CREATED.value(), true, "Stock delete Successfully", isDeleted),
+				HttpStatus.CREATED);
+	}
+
+	@PutMapping("/{companyCode}/{stockCode}")
+	public ResponseEntity<?> updateStock(@Valid @RequestBody StockCreation stockCreation, @PathVariable int companyCode,
+			@PathVariable int stockCode) {
+		StockCreation updateStock = stockService.updateStock(stockCreation, companyCode, stockCode);
+		if (null == updateStock)
+			return new ResponseEntity<>(new ApiResponse<>(HttpStatus.CREATED.value(), true, "Stock not updated Successfully", updateStock),
+					HttpStatus.CREATED);
+		else
+			return new ResponseEntity<>(new ApiResponse<>(HttpStatus.CREATED.value(), true, "Stock updated Successfully", updateStock),
+					HttpStatus.CREATED);
+	}
 }
