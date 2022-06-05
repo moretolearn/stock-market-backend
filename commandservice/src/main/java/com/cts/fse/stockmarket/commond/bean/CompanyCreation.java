@@ -3,6 +3,7 @@ package com.cts.fse.stockmarket.commond.bean;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 
 import java.util.List;
@@ -18,12 +19,16 @@ public class CompanyCreation {
     @NotEmpty(message = "can not be empty")
     private String companyName;
 
+    @NotEmpty(message = "can not be empty")
     private String description;
 
+    @NotEmpty(message = "can not be empty")
     private String ceo;
 
+    @Min(value = 100000000,message = "Company Turnover must be greater than 10Cr")
     private long turnover;
 
+    @NotEmpty(message = "can not be empty")
     private String website;
 
     private String exchange;
