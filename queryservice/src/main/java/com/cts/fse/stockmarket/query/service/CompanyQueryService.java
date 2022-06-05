@@ -4,7 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cts.fse.stockmarket.query.bean.CompanyQuery;
+import com.cts.fse.stockmarket.query.dto.StockMinMaxAvgDto;
+import com.cts.fse.stockmarket.query.dto.StocksMinMaxAvgDto;
 import com.cts.fse.stockmarket.query.repository.CompanyQueryRepository;
+import com.cts.fse.stockmarket.query.repository.StockQueryRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,17 +18,23 @@ public class CompanyQueryService {
 
     @Autowired
     CompanyQueryRepository companyQueryRepository;
+    
+    @Autowired
+    StockQueryRepository stockQueryRepository;
 
     public List<CompanyQuery> getAllCompanies()
     {
-        List<CompanyQuery> companies = new ArrayList<CompanyQuery>();
-        companyQueryRepository.findAll().forEach(company -> companies.add(company));
-        return companies;
+    	List<CompanyQuery> findAll = companyQueryRepository.findAll();
+        return findAll;
     }
 
-    public Optional<CompanyQuery> getSingleCompanybyCompanyId(int companyCode){
+    public StocksMinMaxAvgDto<Object> getSingleCompanybyCompanyId(int companyCode){
         Optional<CompanyQuery> companyQueryOptional=companyQueryRepository.findById(companyCode);
-       return companyQueryOptional;
+        StockMinMaxAvgDto findStocksByMinMaxAvg = stockQueryRepository.findStocksByMinMaxAvg(companyCode);
+        StocksMinMaxAvgDto<Object> stocksMinMaxAvgDto = new StocksMinMaxAvgDto<Object>();
+        stocksMinMaxAvgDto.setObject(companyQueryOptional.get());
+        stocksMinMaxAvgDto.setStockMinMaxAvgDto(findStocksByMinMaxAvg);
+       return stocksMinMaxAvgDto;
     }
     
     public CompanyQuery createCompany(CompanyQuery companyQuery){

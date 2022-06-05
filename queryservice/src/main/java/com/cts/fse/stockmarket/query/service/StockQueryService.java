@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 
 import com.cts.fse.stockmarket.query.bean.CompanyQuery;
 import com.cts.fse.stockmarket.query.bean.StockQuery;
+import com.cts.fse.stockmarket.query.dto.StockMinMaxAvgDto;
+import com.cts.fse.stockmarket.query.dto.StocksMinMaxAvgDto;
 import com.cts.fse.stockmarket.query.repository.CompanyQueryRepository;
 import com.cts.fse.stockmarket.query.repository.StockQueryRepository;
 
@@ -34,13 +36,17 @@ public class StockQueryService {
         return stockQueryRepository.findById(stockId);
     }
     
-    public List<StockQuery> findAllStocksBetweenDates(int companyCode, Date startDate, Date endDate){
+    public StocksMinMaxAvgDto<?> findAllStocksBetweenDates(int companyCode, Date startDate, Date endDate){
         Optional<CompanyQuery> companyQueryOptional = companyQueryRepository.findById(companyCode);
         if(!companyQueryOptional.isPresent())
             return  null;
         List<StockQuery> stocksCreatedOnBetween = stockQueryRepository
                 .findByCompanyQueryCompanyCodeAndCreatedOnBetween(companyCode, startDate, endDate);
-        return stocksCreatedOnBetween;
+        StockMinMaxAvgDto findStocksByMinMaxAvgByDates = stockQueryRepository.findStocksByMinMaxAvgByDates(companyCode, startDate, endDate);
+        StocksMinMaxAvgDto<?> stocksMinMaxAvgDto = new StocksMinMaxAvgDto();
+        stocksMinMaxAvgDto.setObject(stocksCreatedOnBetween);
+        stocksMinMaxAvgDto.setStockMinMaxAvgDto(findStocksByMinMaxAvgByDates);
+        return stocksMinMaxAvgDto;
     }
 
     public StockQuery addstock(StockQuery stockQuery){
