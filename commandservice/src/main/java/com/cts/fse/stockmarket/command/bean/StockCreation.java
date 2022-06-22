@@ -1,19 +1,24 @@
-package com.cts.fse.stockmarket.commond.bean;
+package com.cts.fse.stockmarket.command.bean;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import lombok.Data;
 
 import javax.persistence.*;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import java.util.Date;
 
-@Entity
 @Data
+@Entity
 @Table(name = "stock")
 public class StockCreation {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private int stockCode;
+    private Long stockCode;
 
     private String stockName;
 
@@ -29,9 +34,10 @@ public class StockCreation {
 //    @Temporal(TemporalType.DATE)
     private Date createdOn;
 
-    @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="companyCode", nullable=true)
-    private CompanyCreation companyCreation;
+  
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name="companyCode")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private CompanyCreation company;
 }
 

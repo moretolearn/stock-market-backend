@@ -1,4 +1,4 @@
-package com.cts.fse.stockmarket.commond.bean;
+package com.cts.fse.stockmarket.command.bean;
 
 import lombok.Data;
 
@@ -8,13 +8,13 @@ import javax.validation.constraints.NotEmpty;
 
 import java.util.List;
 
-@Entity
 @Data
+@Entity
 @Table(name = "company")
 public class CompanyCreation {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private int companyCode;
+    private Long companyCode;
 
     @NotEmpty(message = "can not be empty")
     private String companyName;
@@ -33,12 +33,7 @@ public class CompanyCreation {
 
     private String exchange;
 
-    @OneToMany(
-            cascade = CascadeType.ALL,
-            mappedBy = "companyCreation",
-            orphanRemoval = true,
-            fetch = FetchType.LAZY
-    )
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "company")
     private List<StockCreation> stocks;
 
 

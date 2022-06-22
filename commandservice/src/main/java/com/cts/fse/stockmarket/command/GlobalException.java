@@ -1,4 +1,4 @@
-package com.cts.fse.stockmarket.commond;
+package com.cts.fse.stockmarket.command;
 
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 

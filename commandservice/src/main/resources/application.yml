@@ -1,6 +1,13 @@
 spring:
   application:
     name: commandservice
+  kafka:
+    template:
+      default-topic: stock_market
+    producer:
+      bootstrap-servers: localhost:9092
+      key-serializer: org.apache.kafka.common.serialization.LongSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer    
   jpa:
     show-sql: true
     hibernate:
@@ -16,5 +23,4 @@ spring:
     date-format: dd-MM-yyyy
     time-zone: Asia/Kolkata
 server:
-  port : 8082
-
+  port : 8081
