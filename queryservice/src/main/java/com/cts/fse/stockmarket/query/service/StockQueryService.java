@@ -32,60 +32,29 @@ public class StockQueryService {
         return stocks;
     }
 
-    public Optional<StockQuery> getSingleStockbyId(int stockId) throws Exception{
+    public Optional<StockQuery> getSingleStockbyId(Long stockId) throws Exception{
         return stockQueryRepository.findById(stockId);
     }
     
-    public StocksMinMaxAvgDto<?> findAllStocksBetweenDates(int companyCode, Date startDate, Date endDate){
-        Optional<CompanyQuery> companyQueryOptional = companyQueryRepository.findById(companyCode);
-        if(!companyQueryOptional.isPresent())
-            return  null;
-        List<StockQuery> stocksCreatedOnBetween = stockQueryRepository
-                .findByCompanyQueryCompanyCodeAndCreatedOnBetween(companyCode, startDate, endDate);
-        StockMinMaxAvgDto findStocksByMinMaxAvgByDates = stockQueryRepository.findStocksByMinMaxAvgByDates(companyCode, startDate, endDate);
-        StocksMinMaxAvgDto<?> stocksMinMaxAvgDto = new StocksMinMaxAvgDto();
-        stocksMinMaxAvgDto.setObject(stocksCreatedOnBetween);
-        stocksMinMaxAvgDto.setStockMinMaxAvgDto(findStocksByMinMaxAvgByDates);
-        return stocksMinMaxAvgDto;
-    }
-
-    public StockQuery addstock(StockQuery stockQuery){
-        Optional<CompanyQuery> companyQueryOptional= companyQueryRepository.findById(stockQuery.getCompanyQuery().getCompanyCode());
-        if(!companyQueryOptional.isPresent())
-            return null;
-        stockQuery.setCompanyQuery(companyQueryOptional.get());
-        stockQueryRepository.save(stockQuery);
-        return stockQuery;
-    }
-
-    public StockQuery updateStock(StockQuery stockQuery, int stockCode){
-        Optional<CompanyQuery> companyQueryOptional= companyQueryRepository.findById(stockQuery.getCompanyQuery().getCompanyCode());
-        if(!companyQueryOptional.isPresent())
-            return null;
-        Optional<StockQuery> stockQueryOptional= stockQueryRepository.findById(stockCode);
-        if(!stockQueryOptional.isPresent())
-            return null;
-
-        stockQuery.setCompanyQuery(companyQueryOptional.get());
-        stockQuery.setStockCode(stockQueryOptional.get().getStockCode());
-        stockQueryRepository.save(stockQuery);
-        return stockQuery;
-    }
-
-    public boolean deleteStock(int stockCode){
-        Optional<StockQuery> stockQueryOptional=stockQueryRepository.findById(stockCode);
-        if(!stockQueryOptional.isPresent())
-            return false;
-        stockQueryRepository.deleteById(stockCode);
-        return true;
-    }
+//    public StocksMinMaxAvgDto<?> findAllStocksBetweenDates(Long companyCode, Date startDate, Date endDate){
+//        Optional<CompanyQuery> companyQueryOptional = companyQueryRepository.findById(companyCode);
+//        if(!companyQueryOptional.isPresent())
+//            return  null;
+//        List<StockQuery> stocksCreatedOnBetween = stockQueryRepository
+//                .findByCompanyQueryCompanyCodeAndCreatedOnBetween(companyCode, startDate, endDate);
+//        StockMinMaxAvgDto findStocksByMinMaxAvgByDates = stockQueryRepository.findStocksByMinMaxAvgByDates(companyCode, startDate, endDate);
+//        StocksMinMaxAvgDto<?> stocksMinMaxAvgDto = new StocksMinMaxAvgDto();
+//        stocksMinMaxAvgDto.setObject(stocksCreatedOnBetween);
+//        stocksMinMaxAvgDto.setStockMinMaxAvgDto(findStocksByMinMaxAvgByDates);
+//        return stocksMinMaxAvgDto;
+//    }
     
-    public List<StockQuery> findAllStocksByCompanyCode(int companyCode){
+    public List<StockQuery> findAllStocksByCompanyCode(Long companyCode){
         Optional<CompanyQuery> companyQueryOptional = companyQueryRepository.findById(companyCode);
         if(!companyQueryOptional.isPresent())
             return  null;
         List<StockQuery> stocksCreatedOnBetween = stockQueryRepository
-                .findByCompanyQueryCompanyCode(companyCode);
+                .findByCompanyCompanyCode(companyCode);
         return stocksCreatedOnBetween;
     }
 }

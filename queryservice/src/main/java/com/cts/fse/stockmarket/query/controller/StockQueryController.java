@@ -32,46 +32,20 @@ public class StockQueryController {
 	}
 
 	@GetMapping(value = "/info/{stockCode}")
-	public ResponseEntity<?> getSingleStockDetails(@PathVariable("stockCode") int stockCode) throws Exception {
+	public ResponseEntity<?> getSingleStockDetails(@PathVariable("stockCode") Long stockCode) throws Exception {
 		return new ResponseEntity<>(new ApiResponse<>(HttpStatus.OK.value(), true, "Stock List Retrived Successfully",
 				stockQueryService.getSingleStockbyId(stockCode)), HttpStatus.OK);
 	}
 	
-    @GetMapping("/get/{companyCode}/{startDate}/{endDate}")
-    public ResponseEntity<?> findAllStocksBetweenDates(@PathVariable(value = "companyCode") int companyCode, @PathVariable(value = "startDate") @DateTimeFormat(pattern = "dd-MM-yyyy") Date startDate,
-                                                                      @PathVariable(value = "endDate") @DateTimeFormat(pattern = "dd-MM-yyyy") Date endDate){
-        return new ResponseEntity<>(new ApiResponse<>(HttpStatus.OK.value(), true, "Stock List Retrived Successfully",
-				stockQueryService.findAllStocksBetweenDates(companyCode, startDate, endDate)), HttpStatus.OK);
-    }
-
-    @PostMapping("/add")
-    public ResponseEntity<StockQuery> addStock(@RequestBody StockQuery stockQuery){
-        StockQuery addStock = stockQueryService.addstock(stockQuery);
-        if(null==addStock)
-            return ResponseEntity.unprocessableEntity().build();
-
-        return new ResponseEntity<>(stockQuery, HttpStatus.CREATED);
-    }
-
-    @PutMapping("/{stockCode}")
-    public ResponseEntity<StockQuery> updateStock(@Valid @RequestBody StockQuery stockQuery, @PathVariable int  stockCode) {
-        StockQuery updateStock = stockQueryService.updateStock(stockQuery, stockCode);
-        if(null==updateStock)
-            return ResponseEntity.unprocessableEntity().build();
-        else
-            return new ResponseEntity<>(updateStock,HttpStatus.CREATED);
-    }
-
-    @DeleteMapping("/{stockCode}")
-    public ResponseEntity<String> deleteStock(@PathVariable int  stockCode) {
-        boolean isDeleted = stockQueryService.deleteStock(stockCode);
-        if(!isDeleted)
-            return new ResponseEntity<>("stock not found with Id", HttpStatus.NOT_FOUND);
-        return new ResponseEntity<>("stock deleted successfully",HttpStatus.OK);
-    }
+//    @GetMapping("/get/{companyCode}/{startDate}/{endDate}")
+//    public ResponseEntity<?> findAllStocksBetweenDates(@PathVariable(value = "companyCode") Long companyCode, @PathVariable(value = "startDate") @DateTimeFormat(pattern = "dd-MM-yyyy") Date startDate,
+//                                                                      @PathVariable(value = "endDate") @DateTimeFormat(pattern = "dd-MM-yyyy") Date endDate){
+//        return new ResponseEntity<>(new ApiResponse<>(HttpStatus.OK.value(), true, "Stock List Retrived Successfully",
+//				stockQueryService.findAllStocksBetweenDates(companyCode, startDate, endDate)), HttpStatus.OK);
+//    }
 
     @GetMapping("/getall/{companyCode}")
-    public ResponseEntity<?> findAllStocksBYCompanyCode(@PathVariable(value = "companyCode") int companyCode){
+    public ResponseEntity<?> findAllStocksBYCompanyCode(@PathVariable(value = "companyCode") Long companyCode){
         return new ResponseEntity<>(new ApiResponse<>(HttpStatus.OK.value(), true, "Stock List Retrived Successfully",
 				stockQueryService.findAllStocksByCompanyCode(companyCode)), HttpStatus.OK);
     }

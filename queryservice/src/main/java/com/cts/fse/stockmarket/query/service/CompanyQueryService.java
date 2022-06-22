@@ -4,12 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cts.fse.stockmarket.query.bean.CompanyQuery;
+import com.cts.fse.stockmarket.query.bean.StockQuery;
 import com.cts.fse.stockmarket.query.dto.StockMinMaxAvgDto;
 import com.cts.fse.stockmarket.query.dto.StocksMinMaxAvgDto;
 import com.cts.fse.stockmarket.query.repository.CompanyQueryRepository;
 import com.cts.fse.stockmarket.query.repository.StockQueryRepository;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,32 +30,53 @@ public class CompanyQueryService {
         return findAll;
     }
 
-    public StocksMinMaxAvgDto<Object> getSingleCompanybyCompanyId(int companyCode){
-        Optional<CompanyQuery> companyQueryOptional=companyQueryRepository.findById(companyCode);
-        StockMinMaxAvgDto findStocksByMinMaxAvg = stockQueryRepository.findStocksByMinMaxAvg(companyCode);
+    public StocksMinMaxAvgDto<Object> getSingleCompanybyCompanyId(Long companyCode){
+        Optional<CompanyQuery> companyQueryOptional=companyQueryRepository.findByCompanyCode(companyCode);
+//        StockMinMaxAvgDto findStocksByMinMaxAvg = stockQueryRepository.findStocksByMinMaxAvg(companyCode);
         StocksMinMaxAvgDto<Object> stocksMinMaxAvgDto = new StocksMinMaxAvgDto<Object>();
+        if(companyQueryOptional.isPresent())
         stocksMinMaxAvgDto.setObject(companyQueryOptional.get());
-        stocksMinMaxAvgDto.setStockMinMaxAvgDto(findStocksByMinMaxAvg);
+//        stocksMinMaxAvgDto.setStockMinMaxAvgDto(findStocksByMinMaxAvg);
        return stocksMinMaxAvgDto;
+    }
+    
+    public Optional<CompanyQuery> getSingleCompanybyCompanyId1(Long companyCode){
+        Optional<CompanyQuery> companyQueryOptional=companyQueryRepository.findById(companyCode);
+       return companyQueryOptional;
     }
     
     public CompanyQuery createCompany(CompanyQuery companyQuery){
         CompanyQuery savedCompanyQuery = companyQueryRepository.save(companyQuery);
         return savedCompanyQuery;
     }
-
-    public CompanyQuery updateCompany(CompanyQuery companyQuery, int companyCode){
-        Optional<CompanyQuery> companyQueryOptional=companyQueryRepository.findById(companyCode);
+    
+    public List<StockQuery> findAllStocksBetweenDates1(Long companyCode, Date startDate, Date endDate){
+        Optional<CompanyQuery> companyQueryOptional = companyQueryRepository.findById(companyCode);
         if(!companyQueryOptional.isPresent())
+            return  null;
+        CompanyQuery byCompanyCodeAndStocksCreatedOnBetween = companyQueryRepository
+                .findByCompanyCodeAndStocksCreatedOnBetween(companyCode, startDate, endDate);
+        if(byCompanyCodeAndStocksCreatedOnBetween!=null)
+            return byCompanyCodeAndStocksCreatedOnBetween.getStocks();
+        else
             return null;
-
-        companyQuery.setCompanyCode(companyQueryOptional.get().getCompanyCode());
-        companyQueryRepository.save(companyQuery);
-        return companyQuery;
-
+    }
+    
+    public List<StockQuery> findAllStocksBetweenDates(Long companyCode, Date startDate, Date endDate){
+        Optional<CompanyQuery> companyQueryOptional = companyQueryRepository.findById(companyCode);
+        if(!companyQueryOptional.isPresent())
+            return  null;
+        CompanyQuery byCompanyCodeAndStocksCreatedOnBetween = companyQueryRepository
+                .findByCompanyCodeAndStocksCreatedOnBetween(companyCode, startDate, endDate);
+        if(byCompanyCodeAndStocksCreatedOnBetween!=null)
+            return byCompanyCodeAndStocksCreatedOnBetween.getStocks();
+        else
+            return null;
     }
 
-    public boolean deleteCompany(int companyCode){
+    
+
+    public boolean deleteCompany(Long companyCode){
         Optional<CompanyQuery> companyQueryOptional=companyQueryRepository.findById(companyCode);
         if(!companyQueryOptional.isPresent())
            return false;

@@ -1,12 +1,19 @@
 package com.cts.fse.stockmarket.query.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.Date;
+import java.util.Optional;
+
+import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
 import com.cts.fse.stockmarket.query.bean.CompanyQuery;
 
 @Repository
-public interface CompanyQueryRepository extends JpaRepository<CompanyQuery, Integer> {
+public interface CompanyQueryRepository extends MongoRepository<CompanyQuery, Long> {
+	
+	Optional<CompanyQuery> findByCompanyCode(Long companyId);
+
+    CompanyQuery findByCompanyCodeAndStocksCreatedOnBetween(Long companyId, Date startDate, Date endDate);
 
     }
 

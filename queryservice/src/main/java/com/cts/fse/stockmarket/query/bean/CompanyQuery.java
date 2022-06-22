@@ -4,22 +4,15 @@ import lombok.Data;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 @Data
-@Entity
-@Table(name = "company")
+@Document
 public class CompanyQuery {
 	
 	@Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    private int companyCode;
+    private Long companyCode;
 
     private String companyName;
 
@@ -33,7 +26,7 @@ public class CompanyQuery {
 
     private String exchange;
 
-    @OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "companyQuery")
+//    @OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "companyQuery")
     private List<StockQuery> stocks;
 
 
