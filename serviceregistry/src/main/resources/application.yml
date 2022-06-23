@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: serviceregistry
+eureka:
+  client:
+    registerWithEureka: false  
+    fetchRegistry: false 
+server:
+  port : 8081
