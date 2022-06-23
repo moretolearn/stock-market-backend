@@ -6,19 +6,30 @@ spring:
     name: apigateway
 
 zuul:
-#  prefix: /api/v1
+  prefix: /api/v1
   routes:
     commondservice:
       path: /command/**
-      serviceId: commondservice
+      serviceId: commandservice
     queryservice:
       path: /query/**
       serviceId: queryservice
  
 
-#ribbon:
-#  eureka:
-#    enabled: true    
+ribbon:
+   ReadTimeout: 60000
+   connection-timeout: 3000
+   eureka:
+      enabled: true
+      
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 5000      
+      
 
 eureka:
   client:
