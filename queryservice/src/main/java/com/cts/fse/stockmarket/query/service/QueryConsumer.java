@@ -93,35 +93,37 @@ public class QueryConsumer {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Autowired
 	private MongoTemplate mongoTemplate;
-	
+
 	@KafkaListener(topics = "stock_market_delete1", groupId = "group_id")
 	public void consume2(String companyMessage) {
 		try {
 			System.err.println(companyMessage);
-			
+
 			StockQuery stockQuery = OBJECT_MAPPER.readValue(companyMessage, StockQuery.class);
-			
-//			Query query = new Query();
-//		    query.addCriteria(Criteria.where("stocks.stockCode" ).exists(true));
-//		    List<CompanyQuery> companyQueries = mongoTemplate.find(query,CompanyQuery.class);
-//			
-//			System.err.println(companyQueries);
-			
-//			companyQueries.forEach(company->{
-//				System.err.println(company);
-//				company.setStocks(new ArrayList<>());
-//				companyQueryRepository.save(company);
-//			});
-		    
-			Optional<StockQuery> singleStockbyStockCode = stockQueryRepository
-					.findById(stockQuery.getStockCode());
+
+			Optional<StockQuery> singleStockbyStockCode = stockQueryRepository.findById(stockQuery.getStockCode());
 			if (singleStockbyStockCode.isPresent()) {
 				StockQuery stockQuery2 = singleStockbyStockCode.get();
 				stockQueryRepository.deleteById(stockQuery.getStockCode());
 			}
+			
+//			List<StockQuery> findByStockCode = stockQueryRepository.findByStockCode(stockQuery.getStockCode());
+//			
+//			Query query = new Query();
+//			query.addCriteria(Criteria.where("stocks.stockCode").exists(true));
+//			List<CompanyQuery> companyQueries = mongoTemplate.find(query, CompanyQuery.class);
+//			System.err.println(companyQueries);
+//			companyQueries.forEach(company -> {
+//				System.err.println(company);
+//				company.setStocks(new ArrayList<>());
+//				companyQueryRepository.save(company);
+//			});
+
+			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

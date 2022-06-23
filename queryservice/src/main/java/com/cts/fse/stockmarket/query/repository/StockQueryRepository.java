@@ -18,6 +18,8 @@ public interface StockQueryRepository extends MongoRepository<StockQuery, Long>{
     
     List<StockQuery> findByCompanyCompanyCode(Long companyId);
     
+    List<StockQuery> findByStockCode(Long companyId);
+    
 //    @Query(value = "select min(price) as min,max(price) as max,avg(price) as avg from stock s where company_code = ?",nativeQuery = true)
 //    StockMinMaxAvgDto findStocksByMinMaxAvg(Long companyId);
 //    
