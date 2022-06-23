@@ -12,7 +12,7 @@ import com.cts.fse.stockmarket.commonutils.ApiResponse;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/api/v1/company")
+@RequestMapping("/company")
 public class CompanyCommandController<T> {
 
 	@Autowired

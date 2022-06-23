@@ -33,6 +33,11 @@ eureka:
   instance:
     preferIpAddress: true
   lease-renewal-interval-in-seconds: 30
+  
+#commandservice:
+#  ribbon:
+#    listOfServers: http://localhost:8000, http://localhost:8001  
+
 ---
 spring:
   profiles: docker

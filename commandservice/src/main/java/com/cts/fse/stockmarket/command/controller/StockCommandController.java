@@ -16,7 +16,7 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/api/v1/stock")
+@RequestMapping("/stock")
 public class StockCommandController {
 
 	@Autowired
