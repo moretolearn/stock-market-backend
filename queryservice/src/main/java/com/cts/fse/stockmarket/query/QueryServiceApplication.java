@@ -3,6 +3,7 @@ package com.cts.fse.stockmarket.query;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.cloud.loadbalancer.annotation.LoadBalancerClient;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.Bean;
 
@@ -12,6 +13,7 @@ import com.mongodb.MongoClientOptions;
 @SpringBootApplication
 @EntityScan("com.cts.fse.stockmarket.query.bean")
 @EnableEurekaClient
+//@LoadBalancerClient("queryservice")
 public class QueryServiceApplication
 {
     public static void main(String[] args)

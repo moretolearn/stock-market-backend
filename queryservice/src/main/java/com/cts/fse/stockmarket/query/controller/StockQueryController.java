@@ -17,7 +17,7 @@ import com.cts.fse.stockmarket.query.bean.StockQuery;
 import com.cts.fse.stockmarket.query.service.StockQueryService;
 
 @RestController
-@RequestMapping("/api/v1/stock")
+@RequestMapping("/stock")
 @Validated
 public class StockQueryController {
 

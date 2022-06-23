@@ -8,7 +8,7 @@ import com.cts.fse.stockmarket.commonutils.ApiResponse;
 import com.cts.fse.stockmarket.query.service.CompanyQueryService;
 
 @RestController
-@RequestMapping("/api/v1/company")
+@RequestMapping("/company")
 public class CompanyQueryController {
 
 	@Autowired
