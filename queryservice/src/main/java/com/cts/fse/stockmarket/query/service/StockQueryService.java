@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class StockQueryService {
@@ -36,18 +37,26 @@ public class StockQueryService {
         return stockQueryRepository.findById(stockId);
     }
     
-//    public StocksMinMaxAvgDto<?> findAllStocksBetweenDates(Long companyCode, Date startDate, Date endDate){
-//        Optional<CompanyQuery> companyQueryOptional = companyQueryRepository.findById(companyCode);
-//        if(!companyQueryOptional.isPresent())
-//            return  null;
+    public StocksMinMaxAvgDto<?> findAllStocksBetweenDates(Long companyCode, Date startDate, Date endDate){
+        Optional<CompanyQuery> companyQueryOptional = companyQueryRepository.findById(companyCode);
+        if(!companyQueryOptional.isPresent())
+            return  null;
 //        List<StockQuery> stocksCreatedOnBetween = stockQueryRepository
-//                .findByCompanyQueryCompanyCodeAndCreatedOnBetween(companyCode, startDate, endDate);
+//                .findByCompanyCompanyCodeAndCreatedOnBetween(companyCode, startDate, endDate);
 //        StockMinMaxAvgDto findStocksByMinMaxAvgByDates = stockQueryRepository.findStocksByMinMaxAvgByDates(companyCode, startDate, endDate);
-//        StocksMinMaxAvgDto<?> stocksMinMaxAvgDto = new StocksMinMaxAvgDto();
-//        stocksMinMaxAvgDto.setObject(stocksCreatedOnBetween);
+        
 //        stocksMinMaxAvgDto.setStockMinMaxAvgDto(findStocksByMinMaxAvgByDates);
-//        return stocksMinMaxAvgDto;
-//    }
+        
+        
+        List<StockQuery> stocks = companyQueryOptional.get().getStocks();
+        List<StockQuery> collect = stocks
+                .stream()
+                .filter(stock -> stock.getStartDate().getTime()>=startDate.getTime() && stock.getEndDate().getTime()<=endDate.getTime())
+                .collect(Collectors.toList());
+		StocksMinMaxAvgDto<?> stocksMinMaxAvgDto = new StocksMinMaxAvgDto();
+            stocksMinMaxAvgDto.setObject(collect);
+        return stocksMinMaxAvgDto;
+    }
     
     public List<StockQuery> findAllStocksByCompanyCode(Long companyCode){
         Optional<CompanyQuery> companyQueryOptional = companyQueryRepository.findById(companyCode);

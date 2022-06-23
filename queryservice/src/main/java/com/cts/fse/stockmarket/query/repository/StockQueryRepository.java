@@ -3,6 +3,7 @@ package com.cts.fse.stockmarket.query.repository;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.data.mongodb.repository.Aggregation;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
@@ -17,6 +18,9 @@ public interface StockQueryRepository extends MongoRepository<StockQuery, Long>{
     List<StockQuery> findByCompanyCompanyCode(Long companyId);
     
     List<StockQuery> findByStockCode(Long companyId);
+    
+    @Aggregation(pipeline = { "{$group: { _id: '', total: {$min: $price }}}" })
+	public double min();
     
 //    @Query(value = "select min(price) as min,max(price) as max,avg(price) as avg from stock s where company_code = ?",nativeQuery = true)
 //    StockMinMaxAvgDto findStocksByMinMaxAvg(Long companyId);

@@ -37,12 +37,12 @@ public class StockQueryController {
 				stockQueryService.getSingleStockbyId(stockCode)), HttpStatus.OK);
 	}
 	
-//    @GetMapping("/get/{companyCode}/{startDate}/{endDate}")
-//    public ResponseEntity<?> findAllStocksBetweenDates(@PathVariable(value = "companyCode") Long companyCode, @PathVariable(value = "startDate") @DateTimeFormat(pattern = "dd-MM-yyyy") Date startDate,
-//                                                                      @PathVariable(value = "endDate") @DateTimeFormat(pattern = "dd-MM-yyyy") Date endDate){
-//        return new ResponseEntity<>(new ApiResponse<>(HttpStatus.OK.value(), true, "Stock List Retrived Successfully",
-//				stockQueryService.findAllStocksBetweenDates(companyCode, startDate, endDate)), HttpStatus.OK);
-//    }
+    @GetMapping("/get/{companyCode}/{startDate}/{endDate}")
+    public ResponseEntity<?> findAllStocksBetweenDates(@PathVariable(value = "companyCode") Long companyCode, @PathVariable(value = "startDate") @DateTimeFormat(pattern = "dd-MM-yyyy") Date startDate,
+                                                                      @PathVariable(value = "endDate") @DateTimeFormat(pattern = "dd-MM-yyyy") Date endDate){
+        return new ResponseEntity<>(new ApiResponse<>(HttpStatus.OK.value(), true, "Stock List Retrived Successfully",
+				stockQueryService.findAllStocksBetweenDates(companyCode, startDate, endDate)), HttpStatus.OK);
+    }
 
     @GetMapping("/getall/{companyCode}")
     public ResponseEntity<?> findAllStocksBYCompanyCode(@PathVariable(value = "companyCode") Long companyCode){
