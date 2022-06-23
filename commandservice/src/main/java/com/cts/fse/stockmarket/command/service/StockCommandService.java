@@ -1,5 +1,6 @@
 package com.cts.fse.stockmarket.command.service;
 
+import java.util.Date;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,7 @@ public class StockCommandService {
 		if (!companyQueryOptional.isPresent())
 			return null;
 		stockCreation.setCompany(companyQueryOptional.get());
+		stockCreation.setCreatedOn(new Date());
 		StockCreation save = stockCommandRepository.save(stockCreation);
 
 		CompanyCreation companyCreation = companyCommandRepository.findById(companyId).get();
@@ -55,6 +57,7 @@ public class StockCommandService {
 
 		stockQuery.setCompany(companyQueryOptional.get());
 		stockQuery.setStockCode(stockQueryOptional.get().getStockCode());
+		stockQuery.setCreatedOn(new Date());
 		stockCommandRepository.save(stockQuery);
 
 		CompanyCreation companyupdation = companyCommandRepository.findById(companyCode).get();
