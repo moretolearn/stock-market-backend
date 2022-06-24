@@ -41,9 +41,8 @@ eureka:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
   instance:
-    preferIpAddress: true
-  lease-renewal-interval-in-seconds: 30
-
+    preferIpAddress: true    lease-renewal-interval-in-seconds: 30
+  
 ---
 spring:
   profiles: docker
