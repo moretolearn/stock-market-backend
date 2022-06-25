@@ -81,10 +81,10 @@ public class QueryConsumer {
 			System.err.println(companyMessage);
 			CompanyQuery receivedcompanyQuery = OBJECT_MAPPER.readValue(companyMessage, CompanyQuery.class);
 			Optional<CompanyQuery> singleCompanybyCompanyId = companyQueryRepository
-					.findByCompanyCode(receivedcompanyQuery.getCompanyCode());
+					.findById(receivedcompanyQuery.getCompanyCode());
 			if (singleCompanybyCompanyId.isPresent()) {
 				CompanyQuery companyQuery = singleCompanybyCompanyId.get();
-				companyQueryRepository.delete(companyQuery);
+				companyQueryRepository.deleteById(receivedcompanyQuery.getCompanyCode());
 				if (companyQuery.getStocks().size() > 0) {
 					companyQuery.getStocks().forEach(entity -> stockQueryRepository.delete(entity));
 				}
