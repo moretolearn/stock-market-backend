@@ -30,23 +30,24 @@ public class CompanyCommandController<T> {
 		return new ResponseEntity<>(new ApiResponse<>(HttpStatus.CREATED.value(), true, "Company Not Added", null),
 				HttpStatus.INTERNAL_SERVER_ERROR);
 	}
-	
-	
-	 @PutMapping("/{companyCode}")
-	    public ResponseEntity<CompanyCreation> updateCompany(@Valid @RequestBody CompanyCreation company, @PathVariable Long  companyCode) {
-		 CompanyCreation companyQuery = companyService.updateCompany(company, companyCode);
-	        if(null==companyQuery)
-	            return ResponseEntity.unprocessableEntity().build();
-	        else
-	            return new ResponseEntity<>(companyQuery,HttpStatus.CREATED);
-	    }
-	
+
+	@PutMapping("/{companyCode}")
+	public ResponseEntity<?> updateCompany(@Valid @RequestBody CompanyCreation company,
+			@PathVariable Long companyCode) {
+		CompanyCreation companyQuery = companyService.updateCompany(company, companyCode);
+		if (null == companyQuery)
+			return new ResponseEntity<>(new ApiResponse<>(HttpStatus.CREATED.value(), true, "Company Not Updated", null),
+					HttpStatus.INTERNAL_SERVER_ERROR);
+		else
+			return new ResponseEntity<>(
+					new ApiResponse<>(HttpStatus.OK.value(), true, "Company Updated Successffully ", companyQuery),
+					HttpStatus.OK);
+	}
 
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<?> deleteCompany(@PathVariable(value = "id") Long companyId) throws Exception {
-		return new ResponseEntity<>(new ApiResponse<>(HttpStatus.OK.value(), true,
-				"Company Deleted Successffully ", companyService.deleteCompany(companyId)), HttpStatus.OK
-				);
+		return new ResponseEntity<>(new ApiResponse<>(HttpStatus.OK.value(), true, "Company Deleted Successffully ",
+				companyService.deleteCompany(companyId)), HttpStatus.OK);
 	}
 
 }
