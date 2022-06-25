@@ -4,32 +4,49 @@ server:
 spring:
   application:
     name: apigateway
+  cloud:
+    loadbalancer:
+      retry:
+        enabled: true  
 
 zuul:
   prefix: /api/v1
   routes:
-    commondservice:
+    commandservice:
       path: /command/**
       serviceId: commandservice
     queryservice:
       path: /query/**
       serviceId: queryservice
+  host:
+    connect-timeout-millis: 246000    
  
 
-#ribbon:
-#   readTimeout: 5000
-#   connection-timeout: 3000
-#   eureka:
-#      enabled: true
-#      
-#hystrix:
-#  commandservice:
-#    default:
-#      execution:
-#        isolation:
-#          thread:
-#            timeoutInMilliseconds: 40000   
+ribbon:
+  eager-load:
+    enabled: true
+    clients: commandservice, queryservice
+  eureka:
+    enabled: true    
+  ReadTimeout: 246000
+  Connection-timeout: 246000
+
+#commandservice:
+#  ribbon:  
+#    ActiveConnectionsLimit: 500
+#    
+#queryservice:
+#  ribbon:  
+#    ActiveConnectionsLimit: 500    
             
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 494000   
+          strategy: THREAD           
       
 
 eureka:
