@@ -12,7 +12,7 @@
 	<groupId>com.cognizant.fse</groupId>
 	<artifactId>stock-market</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>stock-market</name>
+	<name>stockmarket</name>
 	<description>Stock market for Spring Boot</description>
 
 </project>

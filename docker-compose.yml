@@ -1,0 +1,29 @@
+version: '3'
+services:
+  zookeeper:
+    image: wurstmeister/zookeeper
+    container_name: zookeeper
+#    environment:
+#      ALLOW_ANONYMOUS_LOGIN: 'yes'
+    restart: always  
+    ports:
+    - "2181:2181"
+    networks:
+      - sm-net  
+  kafka:
+    image: wurstmeister/kafka
+    container_name: kafka
+    hostname: kafka
+    ports:
+      - "9092:9092"
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: kafka
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_CREATE_TOPICS: "stock_market:1:1"
+    networks:
+      - sm-net  
+networks:
+  sm-net:
+    external: true
