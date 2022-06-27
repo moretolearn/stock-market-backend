@@ -1,4 +1,5 @@
 spring:
+  profiles: default
   autoconfigure:
     exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
   application:
@@ -15,7 +16,9 @@ spring:
   data:
         mongodb:
             database: stock_market_query
-            uri: mongodb://localhost:27017/stock_market_query?maxpoolsize=5
+            host: localhost
+            port: 27017
+#            uri: mongodb://localhost:27017/stock_market_query?maxpoolsize=5
             repositories:              type: auto
             
 #  jpa:
@@ -51,16 +54,34 @@ spring:
   application:
     name: queryservice
   kafka:
-    bootstrap-servers: kafka:9092
+    listener:
+      missing-topics-fatal: false
     consumer:
+      bootstrap-servers: kafka:9092
       group-id: group_id
       auto-offset-reset: earliest
       key-deserializer: org.apache.kafka.common.serialization.LongDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+#  data:
+#    mongodb:
+#      uri: mongodb://mongo_db:27017/stock_market
   data:
     mongodb:
-      uri: mongodb://mongo_db:27017/stock_market
+      database: stock_market
+      host: mymongodb
+      port: 27017
+  jackson:
+    date-format: dd-MM-yyyy
+    time-zone: Asia/Kolkata      
 server:
   port : 8082
   
-
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://sm-registry:8761/eureka/
+  instance:
+    preferIpAddress: true
+    lease-renewal-interval-in-seconds: 30
