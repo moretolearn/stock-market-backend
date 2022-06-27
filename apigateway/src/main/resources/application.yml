@@ -2,6 +2,7 @@ server:
   port: 8083
 
 spring:
+  profiles: default
   application:
     name: apigateway
   cloud:
@@ -58,3 +59,68 @@ eureka:
   instance:
     preferIpAddress: true
     lease-renewal-interval-in-seconds: 30
+    
+---
+
+server:
+  port: 8083
+
+spring:
+  profiles: docker
+  application:
+    name: apigateway
+  cloud:
+    loadbalancer:
+      retry:
+        enabled: true  
+
+zuul:
+  prefix: /api/v1
+  routes:
+    commandservice:
+      path: /command/**
+      serviceId: commandservice
+    queryservice:
+      path: /query/**
+      serviceId: queryservice
+  host:
+    connect-timeout-millis: 246000    
+ 
+
+ribbon:
+  eager-load:
+    enabled: true
+    clients: commandservice, queryservice
+  eureka:
+    enabled: true    
+  ReadTimeout: 246000
+  Connection-timeout: 246000
+
+#commandservice:
+#  ribbon:  
+#    ActiveConnectionsLimit: 500
+#    
+#queryservice:
+#  ribbon:  
+#    ActiveConnectionsLimit: 500    
+            
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 494000   
+          strategy: THREAD           
+      
+
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://sm-registry:8761/eureka/
+  instance:
+    preferIpAddress: true
+    lease-renewal-interval-in-seconds: 30    
+    
