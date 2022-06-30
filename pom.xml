@@ -8,6 +8,7 @@
 		<module>queryservice</module>
 		<module>apigateway</module>
         <module>serviceregistry</module>
+        <module>authservice</module>
     </modules>
 	<groupId>com.cognizant.fse</groupId>
 	<artifactId>stock-market</artifactId>

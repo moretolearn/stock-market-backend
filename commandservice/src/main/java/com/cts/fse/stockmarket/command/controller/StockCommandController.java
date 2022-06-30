@@ -5,13 +5,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.cts.fse.stockmarket.command.bean.CompanyCreation;
 import com.cts.fse.stockmarket.command.bean.StockCreation;
 import com.cts.fse.stockmarket.command.repository.CompanyCommandRepository;
 import com.cts.fse.stockmarket.command.service.StockCommandService;
 import com.cts.fse.stockmarket.commonutils.ApiResponse;
-
-import java.util.Optional;
 
 import javax.validation.Valid;
 

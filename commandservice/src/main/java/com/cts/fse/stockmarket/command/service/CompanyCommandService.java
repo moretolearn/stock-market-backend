@@ -4,11 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cts.fse.stockmarket.command.bean.CompanyCreation;
-import com.cts.fse.stockmarket.command.bean.StockCreation;
 import com.cts.fse.stockmarket.command.repository.CompanyCommandRepository;
 
-import java.util.Date;
-import java.util.List;
 import java.util.Optional;
 
 @Service

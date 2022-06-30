@@ -8,7 +8,6 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
 import com.cts.fse.stockmarket.query.bean.StockQuery;
-import com.cts.fse.stockmarket.query.dto.StockMinMaxAvgDto;
 
 @Repository
 public interface StockQueryRepository extends MongoRepository<StockQuery, Long>{

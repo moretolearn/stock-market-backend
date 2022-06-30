@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 
 import com.cts.fse.stockmarket.query.bean.CompanyQuery;
 import com.cts.fse.stockmarket.query.bean.StockQuery;
-import com.cts.fse.stockmarket.query.dto.StockMinMaxAvgDto;
 import com.cts.fse.stockmarket.query.dto.StocksMinMaxAvgDto;
 import com.cts.fse.stockmarket.query.repository.CompanyQueryRepository;
 import com.cts.fse.stockmarket.query.repository.StockQueryRepository;

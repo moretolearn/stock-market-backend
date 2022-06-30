@@ -10,7 +10,6 @@ import com.cts.fse.stockmarket.query.dto.StocksMinMaxAvgDto;
 import com.cts.fse.stockmarket.query.repository.CompanyQueryRepository;
 import com.cts.fse.stockmarket.query.repository.StockQueryRepository;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
