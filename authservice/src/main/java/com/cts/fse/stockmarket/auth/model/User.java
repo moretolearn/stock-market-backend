@@ -9,7 +9,13 @@ import java.util.List;
 @Table(name = "user")
 @Data
 public class User implements Serializable {
-    public User() {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+
+	public User() {
     }
 
     public User(User user) {

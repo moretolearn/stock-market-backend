@@ -9,7 +9,11 @@ import java.io.Serializable;
 @Table(name = "permission")
 @Data
 public class Permission implements Serializable {
-    @Id
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     @Column(name = "name")

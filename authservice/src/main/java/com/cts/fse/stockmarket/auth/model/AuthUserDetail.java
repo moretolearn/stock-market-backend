@@ -8,7 +8,12 @@ import java.util.Collection;
 import java.util.List;
 public class AuthUserDetail extends User implements UserDetails {
 
-    public AuthUserDetail(User user) {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public AuthUserDetail(User user) {
         super(user);
     }
 
