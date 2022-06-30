@@ -1,4 +1,4 @@
-package com.cts.fse.stockmarket.api;
+package com.cts.fse.stockmarket.apigateway;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
