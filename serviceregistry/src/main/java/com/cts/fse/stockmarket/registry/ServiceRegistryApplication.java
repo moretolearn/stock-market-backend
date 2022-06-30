@@ -1,4 +1,4 @@
-package com.cts.fse.stockmarket.sevice;
+package com.cts.fse.stockmarket.registry;
 
 
 import org.springframework.boot.SpringApplication;
