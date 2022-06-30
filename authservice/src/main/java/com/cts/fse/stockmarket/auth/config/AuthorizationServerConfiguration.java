@@ -1,4 +1,4 @@
-package auth.service.config;
+package com.cts.fse.stockmarket.auth.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

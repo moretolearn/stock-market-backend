@@ -1,4 +1,4 @@
-package auth.service.model;
+package com.cts.fse.stockmarket.auth.model;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

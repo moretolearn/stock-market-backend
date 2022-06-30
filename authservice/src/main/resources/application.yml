@@ -11,9 +11,15 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: update
-    properties.hibernate.dialect: org.hibernate.dialect.MySQL5InnoDBDialect
-  logging:
-    level:
-      org:
-        hibernate:
-          type: trace
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+  output:
+    ansi:
+      enabled: DETECT   
+logging:
+  level:
+    org:
+      hibernate:
+        type: trace
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+          

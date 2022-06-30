@@ -1,4 +1,4 @@
-package auth.service.model;
+package com.cts.fse.stockmarket.auth.model;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -35,11 +35,11 @@ public class User implements Serializable {
     private String email;
     @Column(name = "enabled")
     private boolean enabled;
-    @Column(name = "accountNonExpired")
+    @Column(name = "account_non_expired")
     private boolean accountNonExpired;
-    @Column(name = "credentialsNonExpired")
+    @Column(name = "credentials_non_expired")
     private boolean credentialsNonExpired;
-    @Column(name = "accountNonLocked")
+    @Column(name = "account_non_locked")
     private boolean accountNonLocked;
 
 

@@ -1,7 +1,8 @@
-package auth.service.repository;
+package com.cts.fse.stockmarket.auth.repository;
 
-import auth.service.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.cts.fse.stockmarket.auth.model.User;
 
 import java.util.Optional;
 

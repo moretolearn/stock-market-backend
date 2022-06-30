@@ -1,4 +1,4 @@
-package auth.service.model;
+package com.cts.fse.stockmarket.auth.model;
 
 import lombok.Data;
 

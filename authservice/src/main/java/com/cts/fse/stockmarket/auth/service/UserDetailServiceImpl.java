@@ -1,14 +1,16 @@
-package auth.service.service;
+package com.cts.fse.stockmarket.auth.service;
 
-import auth.service.model.AuthUserDetail;
-import auth.service.model.User;
-import auth.service.repository.UserDetailRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AccountStatusUserDetailsChecker;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
+import com.cts.fse.stockmarket.auth.model.AuthUserDetail;
+import com.cts.fse.stockmarket.auth.model.User;
+import com.cts.fse.stockmarket.auth.repository.UserDetailRepository;
+
 import java.util.Optional;
 
 @Service("userDetailsService")

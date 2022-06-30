@@ -1,4 +1,4 @@
-package auth.service.api;
+package com.cts.fse.stockmarket.auth.api;
 
 
 import org.springframework.http.ResponseEntity;
