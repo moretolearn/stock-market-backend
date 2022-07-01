@@ -12,14 +12,7 @@ spring:
     hibernate:
       ddl-auto: update
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
-  output:
-    ansi:
-      enabled: DETECT   
-logging:
-  level:
-    org:
-      hibernate:
-        type: trace
-  pattern:
-    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
-          
+    
+app:
+  jwt:
+    key: ram    
