@@ -14,6 +14,12 @@ Kafka
 
 Rest API Microservices
 
+CQRS 
+
+JWT Security
+
+Docker
+
 # Project Modules
 There six modules
 
@@ -28,4 +34,3 @@ There six modules
 5.Auth Service
 
 6.Common Utils
-
