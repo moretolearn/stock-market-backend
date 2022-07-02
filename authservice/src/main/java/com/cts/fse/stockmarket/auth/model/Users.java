@@ -27,9 +27,9 @@ public class Users {
 	@GeneratedValue
 	@Column(name = "id")
 	private Integer id;
-	@Column(name = "name",unique = true)
+	@Column(name = "name")
 	private String name;
-	@Column(name = "user_name")
+	@Column(name = "user_name",unique = true)
 	private String userName;
 	@Column(name = "password")
 	private String password;

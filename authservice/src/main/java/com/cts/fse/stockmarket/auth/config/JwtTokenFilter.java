@@ -34,13 +34,13 @@ public class JwtTokenFilter extends OncePerRequestFilter {
 
 		String token = request.getHeader("Authorization");
 		String userName = null;
-		if (token != null) {
+		if (token != null && !token.isEmpty()) {
 			try {
 				userName = jwt.getUserName(token);
 			} catch (IllegalArgumentException e) {
-				logger.error("an error occured during getting username from token", e);
+				logger.error("An error occured during getting username from token", e);
 			} catch (ExpiredJwtException e) {
-				logger.warn("the token is expired and not valid anymore", e);
+				logger.warn("The token is expired and not valid anymore", e);
 			} catch (SignatureException e) {
 				logger.error("Authentication Failed. Username or Password not valid.");
 			}
@@ -51,8 +51,8 @@ public class JwtTokenFilter extends OncePerRequestFilter {
 //					UsernamePasswordAuthenticationToken authToekn = new UsernamePasswordAuthenticationToken(userName,
 //							userDetails.getPassword(), userDetails.getAuthorities());
 
-					 UsernamePasswordAuthenticationToken authToekn =jwt.getAuthentication(token,
-					 SecurityContextHolder.getContext().getAuthentication(), userDetails);
+					UsernamePasswordAuthenticationToken authToekn = jwt.getAuthentication(token,
+							SecurityContextHolder.getContext().getAuthentication(), userDetails);
 
 //					UsernamePasswordAuthenticationToken authToekn = new UsernamePasswordAuthenticationToken(userDetails,
 //							null, userDetails.getAuthorities());
@@ -63,8 +63,6 @@ public class JwtTokenFilter extends OncePerRequestFilter {
 				}
 			}
 		}
-
 		filterChain.doFilter(request, response);
 	}
-
 }

@@ -79,7 +79,8 @@ public class JwtConfig {
 
 		final Claims claims = getClaims(token);
 		final Collection<? extends GrantedAuthority> authorities = Arrays
-				.stream(claims.get("roles").toString().split(",")).map(SimpleGrantedAuthority::new)
+				.stream(claims.get("roles").toString().split(","))
+				.map(SimpleGrantedAuthority::new)
 				.collect(Collectors.toList());
 		return new UsernamePasswordAuthenticationToken(userDetails, "", authorities);
 	} 
