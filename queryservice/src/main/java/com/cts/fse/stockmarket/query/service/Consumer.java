@@ -1,10 +1,10 @@
 package com.cts.fse.stockmarket.query.service;
 
-import lombok.extern.log4j.Log4j2;
+//import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
 @Service
-@Log4j2
+//@Log4j2
 public class Consumer {
 
 

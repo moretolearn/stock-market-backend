@@ -29,7 +29,7 @@ public class StockCommandService {
 			return null;
 		stockCreation.setCompany(companyQueryOptional.get());
 		stockCreation.setCreatedOn(new Date());
-		StockCreation save = stockCommandRepository.save(stockCreation);
+		stockCommandRepository.save(stockCreation);
 
 		CompanyCreation companyCreation = companyCommandRepository.findById(companyId).get();
 		companyCommandRepository.refresh(companyCreation);

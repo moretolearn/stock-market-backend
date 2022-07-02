@@ -5,16 +5,15 @@ import com.cts.fse.stockmarket.query.bean.StockQuery;
 import com.cts.fse.stockmarket.query.repository.CompanyQueryRepository;
 import com.cts.fse.stockmarket.query.repository.StockQueryRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.extern.log4j.Log4j2;
+//import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
-@Log4j2
+//@Log4j2
 public class QueryConsumer {
 
 	@Autowired
@@ -90,9 +89,6 @@ public class QueryConsumer {
 		}
 	}
 
-	@Autowired
-	private MongoTemplate mongoTemplate;
-
 	@KafkaListener(topics = "stock_market_delete1", groupId = "group_id")
 	public void consume2(String companyMessage) {
 		try {
@@ -102,7 +98,7 @@ public class QueryConsumer {
 
 			Optional<StockQuery> singleStockbyStockCode = stockQueryRepository.findById(stockQuery.getStockCode());
 			if (singleStockbyStockCode.isPresent()) {
-				StockQuery stockQuery2 = singleStockbyStockCode.get();
+				singleStockbyStockCode.get();
 				stockQueryRepository.deleteById(stockQuery.getStockCode());
 			}
 			

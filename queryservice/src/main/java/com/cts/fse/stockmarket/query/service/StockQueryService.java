@@ -52,7 +52,7 @@ public class StockQueryService {
                 .stream()
                 .filter(stock -> stock.getStartDate().getTime()>=startDate.getTime() && stock.getEndDate().getTime()<=endDate.getTime())
                 .collect(Collectors.toList());
-		StocksMinMaxAvgDto<?> stocksMinMaxAvgDto = new StocksMinMaxAvgDto();
+		StocksMinMaxAvgDto<?> stocksMinMaxAvgDto = new StocksMinMaxAvgDto<>();
             stocksMinMaxAvgDto.setObject(collect);
         return stocksMinMaxAvgDto;
     }

@@ -12,8 +12,6 @@ import org.springframework.stereotype.Service;
 @Log4j2
 public class CommandProducer {
 
-	private static final String TOPIC = "stock_market";
-
 	@Autowired
 	private KafkaTemplate<Long, String> kafkaTemplate;
 
