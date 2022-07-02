@@ -15,7 +15,7 @@
 	<name>serviceregistry</name>
 	<description>Registry for other microservices</description>
 	<properties>
-		<java.version>8</java.version>
+		<java.version>14</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
