@@ -3,6 +3,7 @@ package com.cts.fse.stockmarket.command.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import com.cts.fse.stockmarket.command.bean.StockCreation;
@@ -23,6 +24,7 @@ public class StockCommandController {
 	CompanyCommandRepository companyRepository;
 
 	@PostMapping("/add/{companyId}")
+	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	public ResponseEntity<?> addStock(@PathVariable() Long companyId, @RequestBody @Valid StockCreation stock) {
 		System.err.println("enter ");
 //		Optional<CompanyCreation> findById = companyRepository.findById(companyId);
@@ -44,6 +46,7 @@ public class StockCommandController {
 //	    }
 
 	@DeleteMapping("/{stockCode}")
+	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	public ResponseEntity<?> deleteStock(@PathVariable Long stockCode) throws Exception {
 		String deleteStock = stockService.deleteStock(stockCode);
 		return new ResponseEntity<>(
@@ -52,6 +55,7 @@ public class StockCommandController {
 	}
 
 	@PutMapping("/{companyCode}/{stockCode}")
+	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	public ResponseEntity<?> updateStock(@Valid @RequestBody StockCreation stockCreation, @PathVariable Long companyCode,
 			@PathVariable Long stockCode) {
 		StockCreation updateStock = stockService.updateStock(stockCreation, companyCode, stockCode);

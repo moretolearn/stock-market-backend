@@ -15,10 +15,16 @@ zuul:
   routes:
     commandservice:
       path: /command/**
+      sensitiveHeaders:
       serviceId: commandservice
     queryservice:
       path: /query/**
+      sensitiveHeaders:
       serviceId: queryservice
+    authservice:
+      path: /auth/**
+      sensitiveHeaders:
+      serviceId: authservice  
   host:
     connect-timeout-millis: 246000    
  
@@ -26,7 +32,7 @@ zuul:
 ribbon:
   eager-load:
     enabled: true
-    clients: commandservice, queryservice
+    clients: commandservice, queryservice, authservice
   eureka:
     enabled: true    
   ReadTimeout: 246000

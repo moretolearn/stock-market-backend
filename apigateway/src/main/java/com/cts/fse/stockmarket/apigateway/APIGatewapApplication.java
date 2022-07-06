@@ -34,8 +34,11 @@ public class APIGatewapApplication {
 	    config.addAllowedMethod("POST");
 	    config.addAllowedMethod("DELETE");
 	    config.addAllowedMethod("PATCH");
+	    config.setMaxAge(18000L);
 	    source.registerCorsConfiguration("/**", config);
 	    return new CorsFilter(source);
 	}
+	
+	
 
 }

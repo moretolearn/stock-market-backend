@@ -3,6 +3,7 @@ package com.cts.fse.stockmarket.command.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import com.cts.fse.stockmarket.command.bean.CompanyCreation;
@@ -19,6 +20,7 @@ public class CompanyCommandController<T> {
 	CompanyCommandService companyService;
 
 	@PostMapping("/add")
+	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	public ResponseEntity<?> addCompany(@RequestBody @Valid CompanyCreation company) {
 
 		CompanyCreation addCompany = companyService.addCompany(company);
@@ -32,6 +34,7 @@ public class CompanyCommandController<T> {
 	}
 
 	@PutMapping("/{companyCode}")
+	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	public ResponseEntity<?> updateCompany(@Valid @RequestBody CompanyCreation company,
 			@PathVariable Long companyCode) {
 		CompanyCreation companyQuery = companyService.updateCompany(company, companyCode);
@@ -45,6 +48,7 @@ public class CompanyCommandController<T> {
 	}
 
 	@DeleteMapping("/delete/{id}")
+	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	public ResponseEntity<?> deleteCompany(@PathVariable(value = "id") Long companyId) throws Exception {
 		return new ResponseEntity<>(new ApiResponse<>(HttpStatus.OK.value(), true, "Company Deleted Successffully ",
 				companyService.deleteCompany(companyId)), HttpStatus.OK);
