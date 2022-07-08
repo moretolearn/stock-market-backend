@@ -20,26 +20,26 @@ import java.util.Optional;
 @Component
 @Log4j2
 public class AppUserDetailsService implements UserDetailsService {
-    @Autowired
-    private UserRepository userRepository;
+	@Autowired
+	private UserRepository userRepository;
 
-    @Override
-    @Transactional
-    public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
+	@Override
+	@Transactional
+	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
 
-        Optional<User> userOptional= userRepository.findByName(userName);
-       if(!userOptional.isPresent()) {
-           throw new UsernameNotFoundException(String.format("The username %s doesn't exist", userName));
-       }
-        User user=userOptional.get();
-        List<GrantedAuthority> authorities = new ArrayList<>();
-        user.getRoles().forEach(role -> {
-            authorities.add(new SimpleGrantedAuthority(role.getName()));
-        });
+		Optional<User> userOptional = userRepository.findByName(userName);
+		if (!userOptional.isPresent()) {
+			throw new UsernameNotFoundException(String.format("The username %s doesn't exist", userName));
+		}
+		User user = userOptional.get();
+		List<GrantedAuthority> authorities = new ArrayList<>();
+		user.getRoles().forEach(role -> {
+			authorities.add(new SimpleGrantedAuthority(role.getName()));
+		});
 
-        UserDetails userDetails = new org.springframework.security.core.userdetails.
-                User(user.getName(), user.getPassword(), authorities);
+		UserDetails userDetails = new org.springframework.security.core.userdetails.User(user.getName(),
+				user.getPassword(), authorities);
 
-        return userDetails;
-    }
+		return userDetails;
+	}
 }

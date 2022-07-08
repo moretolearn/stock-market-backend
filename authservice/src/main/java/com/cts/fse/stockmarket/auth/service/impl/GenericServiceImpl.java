@@ -8,14 +8,15 @@ import com.cts.fse.stockmarket.auth.repository.UserRepository;
 import com.cts.fse.stockmarket.auth.service.GenericService;
 
 import java.util.List;
+
 @Service
 public class GenericServiceImpl implements GenericService {
-    @Autowired
-    private UserRepository userRepository;
+	@Autowired
+	private UserRepository userRepository;
 
-    @Override
-    public List<User> findAllUsers() {
-        return (List<User>)userRepository.findAll();
-    }
+	@Override
+	public List<User> findAllUsers() {
+		return (List<User>) userRepository.findAll();
+	}
 
 }

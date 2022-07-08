@@ -7,6 +7,7 @@ import com.cts.fse.stockmarket.auth.model.User;
 import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User, Long> {
-    Optional<User> findByName(String userName);
-    boolean existsByName(String userName);
+	Optional<User> findByName(String userName);
+
+	boolean existsByName(String userName);
 }
