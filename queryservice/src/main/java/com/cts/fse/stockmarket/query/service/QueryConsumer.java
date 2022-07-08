@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -30,19 +31,21 @@ public class QueryConsumer {
 	@KafkaListener(topics = "stock_market", groupId = "group_id")
 	public void consume1(String companyMessage) {
 		try {
-			System.err.println(companyMessage);
-			CompanyQuery receivedcompanyQuery = OBJECT_MAPPER.readValue(companyMessage, CompanyQuery.class);
+			System.out.println(companyMessage);
+			ResponsData receivedcompanyQuery = OBJECT_MAPPER.readValue(companyMessage, ResponsData.class);
+			System.err.println(receivedcompanyQuery);
 			Optional<CompanyQuery> singleCompanybyCompanyId = companyQueryRepository
-					.findByCompanyCode(receivedcompanyQuery.getCompanyCode());
+					.findByCompanyCode(receivedcompanyQuery.getCompany().getCompanyCode());
+			CompanyQuery company = receivedcompanyQuery.getCompany();
 			if (singleCompanybyCompanyId.isPresent()) {
 				CompanyQuery existingCompany = singleCompanybyCompanyId.get();
-				existingCompany.setCeo(receivedcompanyQuery.getCeo());
-				existingCompany.setCompanyName(receivedcompanyQuery.getCompanyName());
-				existingCompany.setDescription(receivedcompanyQuery.getDescription());
-				existingCompany.setExchange(receivedcompanyQuery.getExchange());
-				existingCompany.setTurnover(receivedcompanyQuery.getTurnover());
-				existingCompany.setWebsite(receivedcompanyQuery.getWebsite());
-				existingCompany.setStocks(receivedcompanyQuery.getStocks());
+				existingCompany.setCeo(company.getCeo());
+				existingCompany.setCompanyName(company.getCompanyName());
+				existingCompany.setDescription(company.getDescription());
+				existingCompany.setExchange(company.getExchange());
+				existingCompany.setTurnover(company.getTurnover());
+				existingCompany.setWebsite(company.getWebsite());
+				existingCompany.setStocks(company.getStocks());
 				companyQueryRepository.save(existingCompany);
 				if (existingCompany.getStocks().size() > 0) {
 					existingCompany.getStocks().forEach(entity -> stockQueryRepository.save(entity));
@@ -51,14 +54,14 @@ public class QueryConsumer {
 
 			else {
 				CompanyQuery newCompany = new CompanyQuery();
-				newCompany.setCompanyCode(receivedcompanyQuery.getCompanyCode());
-				newCompany.setCeo(receivedcompanyQuery.getCeo());
-				newCompany.setCompanyName(receivedcompanyQuery.getCompanyName());
-				newCompany.setDescription(receivedcompanyQuery.getDescription());
-				newCompany.setExchange(receivedcompanyQuery.getExchange());
-				newCompany.setTurnover(receivedcompanyQuery.getTurnover());
-				newCompany.setWebsite(receivedcompanyQuery.getWebsite());
-				newCompany.setStocks(receivedcompanyQuery.getStocks());
+				newCompany.setCompanyCode(company.getCompanyCode());
+				newCompany.setCeo(company.getCeo());
+				newCompany.setCompanyName(company.getCompanyName());
+				newCompany.setDescription(company.getDescription());
+				newCompany.setExchange(company.getExchange());
+				newCompany.setTurnover(company.getTurnover());
+				newCompany.setWebsite(company.getWebsite());
+				newCompany.setStocks(company.getStocks());
 				companyQueryRepository.save(newCompany);
 				if (newCompany.getStocks().size() > 0) {
 					newCompany.getStocks().forEach(entity -> stockQueryRepository.save(entity));
@@ -92,15 +95,20 @@ public class QueryConsumer {
 	@KafkaListener(topics = "stock_market_delete1", groupId = "group_id")
 	public void consume2(String companyMessage) {
 		try {
-			System.err.println(companyMessage);
+			System.out.println(companyMessage);
 
-			StockQuery stockQuery = OBJECT_MAPPER.readValue(companyMessage, StockQuery.class);
+			ResponsData responsData = OBJECT_MAPPER.readValue(companyMessage, ResponsData.class);
 
-			Optional<StockQuery> singleStockbyStockCode = stockQueryRepository.findById(stockQuery.getStockCode());
+			Optional<StockQuery> singleStockbyStockCode = stockQueryRepository.findById(responsData.getStockCode());
 			if (singleStockbyStockCode.isPresent()) {
 				singleStockbyStockCode.get();
-				stockQueryRepository.deleteById(stockQuery.getStockCode());
+				stockQueryRepository.deleteById(responsData.getStockCode());
 			}
+			
+			List<StockQuery> findAll = stockQueryRepository.findAll();
+			Optional<CompanyQuery> findById = companyQueryRepository.findById(responsData.getCompanyCode());
+			findById.get().setStocks(findAll);
+			companyQueryRepository.save(findById.get());
 			
 //			List<StockQuery> findByStockCode = stockQueryRepository.findByStockCode(stockQuery.getStockCode());
 //			

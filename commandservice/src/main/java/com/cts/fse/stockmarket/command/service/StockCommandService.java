@@ -29,21 +29,30 @@ public class StockCommandService {
 			return null;
 		stockCreation.setCompany(companyQueryOptional.get());
 		stockCreation.setCreatedOn(new Date());
-		stockCommandRepository.save(stockCreation);
+		StockCreation save = stockCommandRepository.save(stockCreation);
 
 		CompanyCreation companyCreation = companyCommandRepository.findById(companyId).get();
 		companyCommandRepository.refresh(companyCreation);
-		commandProducer.publishMessage(companyCreation, "stock_market");
+		RequestData requestData = new RequestData();
+        requestData.setCompany(companyCreation);
+        requestData.setCompanyCode(companyCreation.getCompanyCode());
+        requestData.setStockCode(save.getStockCode());
+        requestData.setStock(save);
+        commandProducer.publishMessage(requestData,"stock_market");
 		return stockCreation;
 	}
 
-	public String deleteStock(Long stockId) throws Exception{
+	public String deleteStock(Long stockId,Long companyCode) throws Exception{
         StockCreation stockCreation= stockCommandRepository
                 .findById(stockId)
                 .orElseThrow(() -> new Exception("Stock not found with Id :: "+ stockId));
         stockCommandRepository.deleteById(stockId);
 //        companyCommandRepository.refresh(companyCreation);
-        commandProducer.publishMessage(stockCreation,"stock_market_delete1");
+        RequestData requestData = new RequestData();
+        requestData.setCompanyCode(companyCode);
+        requestData.setStockCode(stockCreation.getStockCode());
+        requestData.setStock(stockCreation);
+        commandProducer.publishMessage(requestData,"stock_market_delete1");
       return "company deleted Successfully with id "+stockId;
   }
 
@@ -58,11 +67,16 @@ public class StockCommandService {
 		stockQuery.setCompany(companyQueryOptional.get());
 		stockQuery.setStockCode(stockQueryOptional.get().getStockCode());
 		stockQuery.setCreatedOn(new Date());
-		stockCommandRepository.save(stockQuery);
+		StockCreation save = stockCommandRepository.save(stockQuery);
 
 		CompanyCreation companyupdation = companyCommandRepository.findById(companyCode).get();
 		companyCommandRepository.refresh(companyupdation);
-		commandProducer.publishMessage(companyupdation, "stock_market");
+		RequestData requestData = new RequestData();
+        requestData.setCompany(companyupdation);
+        requestData.setCompanyCode(companyupdation.getCompanyCode());
+        requestData.setStockCode(save.getStockCode());
+        requestData.setStock(save);
+        commandProducer.publishMessage(requestData,"stock_market");
 		return stockQuery;
 	}
 }

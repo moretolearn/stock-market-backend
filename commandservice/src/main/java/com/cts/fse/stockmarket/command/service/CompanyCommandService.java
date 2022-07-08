@@ -11,45 +11,48 @@ import java.util.Optional;
 @Service
 public class CompanyCommandService {
 
+	@Autowired
+	CompanyCommandRepository companyCommandRepository;
 
-    @Autowired
-    CompanyCommandRepository companyCommandRepository;
-    
-    @Autowired
-    CommandProducer commandProducer;
+	@Autowired
+	CommandProducer commandProducer;
 
-    public CompanyCreation addCompany(CompanyCreation companyQuery) {
-    	companyCommandRepository.save(companyQuery);
-        CompanyCreation companyCreation = companyCommandRepository.findById(companyQuery.getCompanyCode()).get();
-        companyCommandRepository.refresh(companyCreation);
-        commandProducer.publishMessage(companyCreation,"stock_market");
-        return companyCreation;
-    }
+	public CompanyCreation addCompany(CompanyCreation companyQuery) {
+		companyCommandRepository.save(companyQuery);
+		CompanyCreation companyCreation = companyCommandRepository.findById(companyQuery.getCompanyCode()).get();
+		companyCommandRepository.refresh(companyCreation);
+		RequestData requestData = new RequestData();
+		requestData.setCompany(companyCreation);
+		requestData.setCompanyCode(companyCreation.getCompanyCode());
+		commandProducer.publishMessage(requestData, "stock_market");
+		return companyCreation;
+	}
 
-    public CompanyCreation updateCompany(CompanyCreation companyCreation, Long companyCode){
-    	Optional<CompanyCreation> companyQueryOptional=companyCommandRepository.findById(companyCode);
-        if(!companyQueryOptional.isPresent())
-            return null;
+	public CompanyCreation updateCompany(CompanyCreation companyCreation, Long companyCode) {
+		Optional<CompanyCreation> companyQueryOptional = companyCommandRepository.findById(companyCode);
+		if (!companyQueryOptional.isPresent())
+			return null;
 
-        companyCreation.setCompanyCode(companyQueryOptional.get().getCompanyCode());
-        companyCommandRepository.save(companyCreation);
+		companyCreation.setCompanyCode(companyQueryOptional.get().getCompanyCode());
+		companyCommandRepository.save(companyCreation);
 
-        CompanyCreation companyupdation = companyCommandRepository.findById(companyCreation.getCompanyCode()).get();
-        companyCommandRepository.refresh(companyupdation);
-        commandProducer.publishMessage(companyupdation,"stock_market");
-        return companyupdation;
+		CompanyCreation companyupdation = companyCommandRepository.findById(companyCreation.getCompanyCode()).get();
+		companyCommandRepository.refresh(companyupdation);
+		RequestData requestData = new RequestData();
+		requestData.setCompany(companyupdation);
+		requestData.setCompanyCode(companyupdation.getCompanyCode());
+		commandProducer.publishMessage(requestData, "stock_market");
+		return companyupdation;
 
-    }
-    
-    public String deleteCompany(Long companyId) throws Exception{
-          CompanyCreation companyCreation= companyCommandRepository
-                  .findById(companyId)
-                  .orElseThrow(() -> new Exception("Company not found with Id :: "+ companyId));
-          companyCommandRepository.delete(companyCreation);
+	}
+
+	public String deleteCompany(Long companyId) throws Exception {
+		CompanyCreation companyCreation = companyCommandRepository.findById(companyId)
+				.orElseThrow(() -> new Exception("Company not found with Id :: " + companyId));
+		companyCommandRepository.delete(companyCreation);
 //          companyCommandRepository.refresh(companyCreation);
-          commandProducer.publishMessage(companyCreation,"stock_market_delete");
-        return "company deleted Successfully with id "+companyId;
-    }
+		commandProducer.publishMessage(companyCreation, "stock_market_delete");
+		return "company deleted Successfully with id " + companyId;
+	}
 
-   
 }

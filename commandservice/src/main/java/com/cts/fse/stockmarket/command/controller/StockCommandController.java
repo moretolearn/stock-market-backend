@@ -45,12 +45,12 @@ public class StockCommandController {
 //	        return new ResponseEntity<>(stockQuery, HttpStatus.CREATED);
 //	    }
 
-	@DeleteMapping("/{stockCode}")
+	@DeleteMapping("/{stockCode}/{companyCode}")
 	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
-	public ResponseEntity<?> deleteStock(@PathVariable Long stockCode) throws Exception {
-		String deleteStock = stockService.deleteStock(stockCode);
+	public ResponseEntity<?> deleteStock(@PathVariable Long stockCode,@PathVariable Long companyCode) throws Exception {
+		String deleteStock = stockService.deleteStock(stockCode,companyCode);
 		return new ResponseEntity<>(
-				new ApiResponse<>(HttpStatus.CREATED.value(), true, "Stock delete Successfully", deleteStock),
+				new ApiResponse<>(HttpStatus.OK.value(), true, "Stock delete Successfully", deleteStock),
 				HttpStatus.CREATED);
 	}
 

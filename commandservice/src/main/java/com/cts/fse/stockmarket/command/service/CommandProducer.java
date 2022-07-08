@@ -38,4 +38,15 @@ public class CommandProducer {
 			e.printStackTrace();
 		}
 	}
+	
+	public void publishMessage(RequestData requestData, String topic) {
+		try {
+			String value = OBJECT_MAPPER.writeValueAsString(requestData);
+			log.info(String.format("#### -> Producing message -> %s", value));
+//            this.kafkaTemplate.sendDefault(companyCreation.getCompanyCode(), value);
+			this.kafkaTemplate.send(topic, requestData.getCompanyCode(), value);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }
