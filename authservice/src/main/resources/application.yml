@@ -1,6 +1,7 @@
 server:
   port: 9191
 spring:
+  profiles: default
   application:
     name: authservice
   datasource:
@@ -36,6 +37,51 @@ eureka:
     fetchRegistry: true
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
+  instance:
+    preferIpAddress: true
+  lease-renewal-interval-in-seconds: 30
+  
+---
+
+server:
+  port: 9191
+spring:
+  profiles: docker
+  application:
+    name: authservice
+  datasource:
+    url:  jdbc:mysql://sm-mysql:3307/stock_market?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    username: stock
+    password: stock123
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    jdbc-url: ${spring.datasource.url}
+    jdbcUrl: ${spring.datasource.url}
+    initialization-mode: always
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties.hibernate.dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+security:
+  oauth2:
+    resource:
+      filter-order: 3
+  signing-key: MaYzkSjmkzPC57L
+  encoding-strength: 256
+  security-realm: Spring Boot JWT Example Realm
+  jwt:
+    client-id: testjwtclientid
+    client-secret: XY7kmzoNzl100
+    grant-type: password
+    scope-read: read
+    scope-write: write
+    resource-ids: testjwtresourceid
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://sm-registry:8761/eureka/
   instance:
     preferIpAddress: true
   lease-renewal-interval-in-seconds: 30

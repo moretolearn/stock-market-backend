@@ -1,32 +1,36 @@
 version: '3'
 
 services:
+
   #service 1 : mysql
-  db:
-    image: mysql:8.0.19
-    container_name: mysql-db
+  sm-mysql:
+    image: mysql:oracle
+    container_name: sm-mysql
     environment:
-      MYSQL_ROOT_PASSWORD: pass@word1
+      MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: stock_market
+      MYSQL_USER: stock
+      MYSQL_PASSWORD: stock123
     ports:
       - "3307:3306"
     restart: always
    #service 2 : command Service
-  commandService:
-    image: command-service
-    container_name: command-service-app
+  sm-command:
+    image: commandservice
+    container_name: sm-command
     build:
       context: .
       dockerfile: ./commandservice/Dockerfile
     ports:
-      - "8082:8082"
+      - "8081:8081"
     restart: always
     command: --spring.profiles.active=docker
     environment:
       - SPRING_PROFILES_ACTIVE=docker
     depends_on:
-      - db
+      - sm-mysql
       - kafka
+      - sm-registry
     #service 3 : zookeeper
   zookeeper:
     image: wurstmeister/zookeeper:latest
@@ -50,34 +54,87 @@ services:
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
       KAFKA_CREATE_TOPICS: "stock_market:1:1"
     #service 5 : queryservice
-  queryService:
-    image: query-service
-    container_name: query-service-app
+  sm-query:
+    image: queryservice
+    container_name: sm-query
     build:
       context: .
       dockerfile: ./queryservice/Dockerfile
     ports:
-      - "8081:8081"
+      - "8082:8082"
     depends_on:
-      - mongo_db
+      - sm-mongo
       - kafka
+      - sm-registry
     restart: always
     environment:
       - SPRING_PROFILES_ACTIVE=docker
     command: --spring.profiles.active=docker
     #service 6 : mongodb
-  mongo_db:
-    image: "mongo:4.4.3"
+  sm-mongo:
+    image: "mongo:latest"
+    container_name: sm-mongo
     restart: always
     ports:
-      - 27018:27017
+      - 27017:27017
+  #  apigateway
+  sm-apigateway:
+    image: apigateway
+    container_name: sm-apigateway
+    build:
+      context: .
+      dockerfile: ./apigateway/Dockerfile
+    ports:
+      - "8083:8083"
+    restart: always
+    command: --spring.profiles.active=docker
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - sm-registry
+      - sm-command
+      - sm-query
+      - sm-auth
+#  authservice
+  sm-auth:
+    image: authservice
+    container_name: sm-auth
+    build:
+      context: .
+      dockerfile: ./authservice/Dockerfile
+    ports:
+      - "9191:9191"
+    restart: always
+    command: --spring.profiles.active=docker
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - sm-registry
+      
+#  registryservice
+  sm-registry:
+    image: registryservice
+    container_name: sm-registry
+    build:
+      context: .
+      dockerfile: ./serviceregistry/Dockerfile
+    ports:
+      - "8761:8761"
+    restart: always
+    command: --spring.profiles.active=docker
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+        
    #service 7 : frontend from dockerhub
 
   frontend_angular:
     image: "yanumularammohan661/stockmarket:latest"
+    container_name: stockmarket
     ports:
-      - "4200:80"
+      - "80:80"
     restart: always
     depends_on:
-      - commandService
-      - queryService
+      - sm-auth
+      - sm-command
+      - sm-query
+      - sm-registry
